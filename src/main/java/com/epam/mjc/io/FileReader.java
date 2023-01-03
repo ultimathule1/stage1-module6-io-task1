@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileReader {
-
-    public FileReader() {
-    }
     public Profile getDataFromFile(File file) {
         int c;
         StringBuilder str = new StringBuilder();
@@ -15,7 +12,7 @@ public class FileReader {
                 str.append((char)c);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return null;
         }
         String name = getName(str.toString());
