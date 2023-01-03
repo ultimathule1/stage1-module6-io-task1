@@ -5,6 +5,8 @@ import java.io.IOException;
 
 public class FileReader {
 
+    public FileReader() {
+    }
     public Profile getDataFromFile(File file) {
         int c;
         StringBuilder str = new StringBuilder();
@@ -14,12 +16,45 @@ public class FileReader {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            return null;
         }
-        String name = str.substring(str.toString().indexOf("Name: ") + "Name: ".length());
-        int age = Integer.parseInt(str.substring(str.toString().indexOf("Age: ") + "Age: ".length()));
-        String email = str.substring(str.toString().indexOf("Email: ") + "Email: ".length());
-        long phone = Long.parseLong(str.substring(str.toString().indexOf("Phone: ") + "Phone: ".length()));
+        String name = getName(str.toString());
+        int age = getAge(str.toString());
+        String email = getEmail(str.toString());
+        long phone = getPhone(str.toString());
 
         return new Profile(name, age, email, phone);
+    }
+
+    private String getName(String str) {
+        StringBuilder retStr = new StringBuilder();
+        for (int i = str.indexOf("Name: ") + "Name: ".length(); str.charAt(i) != '\n'; i++) {
+            retStr.append(str.charAt(i));
+        }
+        return retStr.toString();
+    }
+
+    private int getAge(String str) {
+        StringBuilder retStr = new StringBuilder();
+        for (int i = (str.indexOf("Age: ") + "Age: ".length()); str.charAt(i) != '\n'; i++) {
+            retStr.append(str.charAt(i));
+        }
+        return Integer.parseInt(retStr.toString());
+    }
+
+    private String getEmail(String str) {
+        StringBuilder retStr = new StringBuilder();
+        for (int i = str.indexOf("Email: ") + "Email: ".length(); str.charAt(i) != '\n'; i++) {
+            retStr.append(str.charAt(i));
+        }
+        return retStr.toString();
+    }
+
+    private Long getPhone(String str) {
+        StringBuilder retStr = new StringBuilder();
+        for (int i = str.indexOf("Phone: ") + "Phone: ".length(); str.charAt(i) != '\n'; i++) {
+            retStr.append(str.charAt(i));
+        }
+        return Long.parseLong(retStr.toString());
     }
 }
